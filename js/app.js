@@ -752,10 +752,10 @@ async function search() {
                     <div class="flex h-full">
                         ${hasCover ? `
                         <div class="relative flex-shrink-0 search-card-img-container">
-                            <img src="${item.vod_pic}" alt="${safeName}" 
+                            <img src="https://images.weserv.nl/?url=${encodeURIComponent(item.vod_pic)}" alt="${safeName}" 
                                  class="h-full w-full object-cover transition-transform hover:scale-110" 
-                                 onerror="this.onerror=null; this.src='https://via.placeholder.com/300x450?text=无封面'; this.classList.add('object-contain');" 
-                                 loading="lazy">
+                                 onerror="if(!this.dataset.fbk){this.dataset.fbk='1';this.src='${item.vod_pic}';}else{this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%22300%22%20height=%22450%22%3E%3Crect%20width=%22300%22%20height=%22450%22%20fill=%22%23222%22/%3E%3Ctext%20x=%22150%22%20y=%22225%22%20fill=%22%23888%22%20font-size=%2220%22%20text-anchor=%22middle%22%3E%E6%97%A0%E5%B0%81%E9%9D%A2%3C/text%3E%3C/svg%3E';this.classList.add('object-contain');}" 
+                                 loading="lazy" referrerpolicy="no-referrer">
                             <div class="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent"></div>
                         </div>` : ''}
                         
