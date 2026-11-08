@@ -533,14 +533,14 @@ function renderDoubanCards(data, container) {
             const originalCoverUrl = item.cover;
             
             // 2. 也准备代理URL作为备选
-            const proxiedCoverUrl = PROXY_URL + encodeURIComponent(originalCoverUrl);
+            const proxiedCoverUrl = 'https://images.weserv.nl/?url=' + encodeURIComponent(originalCoverUrl);
             
             // 为不同设备优化卡片布局
             card.innerHTML = `
                 <div class="relative w-full aspect-[2/3] overflow-hidden cursor-pointer" onclick="fillAndSearchWithDouban('${safeTitle}')">
                     <img src="${originalCoverUrl}" alt="${safeTitle}" 
                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                        onerror="this.onerror=null; this.src='${proxiedCoverUrl}'; this.classList.add('object-contain');"
+                        onerror="if(!this.dataset.fbk){this.dataset.fbk='1';this.src='${proxiedCoverUrl}';}else{this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%22300%22%20height=%22450%22%3E%3Crect%20width=%22300%22%20height=%22450%22%20fill=%22%23222%22/%3E%3Ctext%20x=%22150%22%20y=%22225%22%20fill=%22%23888%22%20font-size=%2220%22%20text-anchor=%22middle%22%3E%E6%97%A0%E5%B0%81%E9%9D%A2%3C/text%3E%3C/svg%3E';this.classList.add('object-contain');}"
                         loading="lazy" referrerpolicy="no-referrer">
                     <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
                     <div class="absolute bottom-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded-sm">
